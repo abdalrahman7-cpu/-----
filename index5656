@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ar">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>💌 رسالتي</title>
+  <style>
+    body{
+      margin:0;
+      background:#ffe6f2;
+      font-family: "Tahoma", sans-serif;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+      flex-direction:column;
+    }
+    h1{
+      color:#d63384;
+      margin-bottom:20px;
+    }
+    .characters{
+      display:flex;
+      gap:40px;
+      margin-bottom:30px;
+    }
+    .characters img{
+      width:120px;
+      height:120px;
+      border-radius:20px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.2);
+    }
+    #kittyBtn{
+      width:100px;
+      height:100px;
+      border:none;
+      border-radius:50%;
+      cursor:pointer;
+      box-shadow:0 4px 10px rgba(0,0,0,0.3);
+      transition:transform 0.3s ease;
+      overflow:hidden;
+    }
+    #kittyBtn:hover{
+      transform:scale(1.1);
+    }
+    #kittyBtn img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+  </style>
+</head>
+<body>
+  <h1>❤ لمريومتي ❤</h1>
+
+  <!-- صور الشخصيات -->
+  <div class="characters">
+    <img src="https://i.ibb.co/YpLk0Wf/hellokitty.png" alt="Hello Kitty">
+    <img src="https://i.ibb.co/DbhHcVd/mymelody.png" alt="My Melody">
+  </div>
+
+  <!-- زر هيلو كيتي -->
+  <button id="kittyBtn" aria-label="زر هيلو كيتي" title="❤️ بحبك ❤️">
+    <img src="https://i.ibb.co/YpLk0Wf/hellokitty.png" alt="Hello Kitty">
+  </button>
+
+  <!-- أغنية عارف حبيبي - عمرو دياب -->
+  <iframe width="0" height="0" 
+    src="https://www.youtube.com/embed/tqlh6VRh1jU?autoplay=1&loop=1&playlist=tqlh6VRh1jU" 
+    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+  </iframe>
+
+  <script>
+    const btn = document.getElementById("kittyBtn");
+    btn.addEventListener("click", () => {
+      alert("❤️ بحبك أوي ❤️");
+    });
+  </script>
+</body>
+</html>
