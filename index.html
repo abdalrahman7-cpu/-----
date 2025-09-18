@@ -1,80 +1,223 @@
 <!doctype html>
 <html lang="ar">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>💌 رسالتي</title>
-  <style>
-    body{
-      margin:0;
-      background:#ffe6f2;
-      font-family: "Tahoma", sans-serif;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      height:100vh;
-      flex-direction:column;
-    }
-    h1{
-      color:#d63384;
-      margin-bottom:20px;
-    }
-    .characters{
-      display:flex;
-      gap:40px;
-      margin-bottom:30px;
-    }
-    .characters img{
-      width:120px;
-      height:120px;
-      border-radius:20px;
-      box-shadow:0 4px 10px rgba(0,0,0,0.2);
-    }
-    #kittyBtn{
-      width:100px;
-      height:100px;
-      border:none;
-      border-radius:50%;
-      cursor:pointer;
-      box-shadow:0 4px 10px rgba(0,0,0,0.3);
-      transition:transform 0.3s ease;
-      overflow:hidden;
-    }
-    #kittyBtn:hover{
-      transform:scale(1.1);
-    }
-    #kittyBtn img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>❤ لمريومتي ❤</title>
+<style>
+:root{
+  --pink1:#ff4d6d; --pink2:#ff9eb3; --bgwhite:#fff;
+}
+html,body{
+  height:100%;
+  margin:0;
+  padding:0;
+  font-family: "Cairo", "Segoe UI", Tahoma, Arial;
+  direction:rtl;
+  background: #ffeef2;
+  background-image:
+    radial-gradient(circle, #ff9eb3 2px, transparent 3px),
+    radial-gradient(circle, #ff4d6d 2px, transparent 3px);
+  background-position: 0 0, 20px 20px;
+  background-size: 40px 40px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  padding:28px;
+}
+h1{
+  color:var(--pink1);
+  font-size:28px;
+  text-align:center;
+  text-shadow:0 4px 18px rgba(255,77,109,0.18);
+  margin-bottom:20px;
+}
+.stage{
+  position:relative;
+  width:420px;
+  max-width:92vw;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.wheel-container {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  box-shadow: 0 18px 40px rgba(255,77,109,0.3);
+  background: linear-gradient(135deg, #ff9eb3 0%, #ff4d6d 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  margin-bottom:20px;
+}
+.ear {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background: #ff4d6d;
+  border-radius: 50% 50% 0 0;
+  top: -40px;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
+  z-index: 15;
+}
+.ear.left { left: 40px; transform: rotate(-20deg); }
+.ear.right { right: 40px; transform: rotate(20deg); }
+canvas{
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  position: relative;
+  z-index: 20;
+}
+.pointer{
+  position:absolute;
+  top:46px;
+  left:50%;
+  transform:translateX(-50%);
+  width:0;
+  height:0;
+  border-left:22px solid transparent;
+  border-right:22px solid transparent;
+  border-bottom:34px solid var(--pink1);
+  z-index:30;
+  filter:drop-shadow(0 6px 14px rgba(0,0,0,0.25));
+}
+#result{
+  margin-top:14px;
+  font-weight:800;
+  color:var(--pink1);
+  font-size:18px;
+  text-align:center;
+  min-height:48px;
+  padding:6px 12px;
+  background:rgba(255,255,255,0.6);
+  border-radius:10px;
+  width: 360px;
+  z-index: 10;
+}
+button{
+  margin-top:12px;
+  padding:10px 18px;
+  border-radius:10px;
+  border:none;
+  background:linear-gradient(90deg,var(--pink1),#ff7aa3);
+  color:#111;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 10px 24px rgba(255,77,109,0.14);
+  z-index: 10;
+}
+.heart{
+  position:fixed;
+  top:-10px;
+  font-size:18px;
+  z-index:5;
+  pointer-events:none;
+  animation:fall linear forwards;
+  filter:drop-shadow(0 6px 10px rgba(0,0,0,0.12));
+}
+@keyframes fall{ to{ transform:translateY(110vh) rotate(30deg); opacity:0 } }
+</style>
 </head>
 <body>
-  <h1>❤ لمريومتي ❤</h1>
+<h1>❤ لمريومتي ❤</h1>
 
-  <!-- صور الشخصيات -->
-  <div class="characters">
-    <img src="https://i.ibb.co/YpLk0Wf/hellokitty.png" alt="Hello Kitty">
-    <img src="https://i.ibb.co/DbhHcVd/mymelody.png" alt="My Melody">
+<div class="stage">
+  <div class="pointer" aria-hidden="true"></div>
+  <div class="wheel-container" aria-label="عجلة الحب">
+    <div class="ear left" aria-hidden="true"></div>
+    <div class="ear right" aria-hidden="true"></div>
+    <canvas id="wheel" width="400" height="400" role="img" aria-label="عجلة الحب"></canvas>
   </div>
+  <div id="result">اضغط "دوّر العجلة" وشوف السبب إللي العجلة بتقولك مخصوص ليكوا 💘</div>
+  <button id="spinBtn">دوّر العجلة</button>
+</div>
 
-  <!-- زر هيلو كيتي -->
-  <button id="kittyBtn" aria-label="زر هيلو كيتي" title="❤️ بحبك ❤️">
-    <img src="https://i.ibb.co/YpLk0Wf/hellokitty.png" alt="Hello Kitty">
-  </button>
+<iframe width="0" height="0" 
+src="https://www.youtube.com/embed/tqlh6VRh1jU?autoplay=1&loop=1&playlist=tqlh6VRh1jU" 
+frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-  <!-- أغنية عارف حبيبي - عمرو دياب -->
-  <iframe width="0" height="0" 
-    src="https://www.youtube.com/embed/tqlh6VRh1jU?autoplay=1&loop=1&playlist=tqlh6VRh1jU" 
-    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-  </iframe>
+<script>
+const reasons = [
+  "بحبك عشان ضحكتك اللي بتنسيني أي هم في الدنيا ❤",
+  "بحبك عشان عيونك اللي أحلى من السما بنجومها ❤",
+  "بحبك عشان كل لحظة بقضيها معاكي بتكون أجمل لحظة في حياتي ❤",
+  "بحبك عشان وجودك في حياتي هو أجمل هدية جتلي من ربنا ❤",
+  "بحبك عشان ضحكتك اللي بتطمن قلبي وبتخليني انسى كل التعب ❤",
+  "بحبك عشان وجودك معايا بيخليني أحس إني مش لوحدي في الدنيا ❤",
+  "بحبك عشان صوتك اللي كل لما بسمعُه بتطمن واحس ان لسه في سبب اعيش ليه ❤",
+  "بحبك عشان روحك اللي مفيش اجمل منها يا ملاكي ❤"
+];
 
-  <script>
-    const btn = document.getElementById("kittyBtn");
-    btn.addEventListener("click", () => {
-      alert("❤️ بحبك أوي ❤️");
-    });
-  </script>
+const canvas = document.getElementById('wheel');
+const ctx = canvas.getContext('2d');
+const W = canvas.width, H = canvas.height;
+const cx = W/2, cy = H/2, radius = Math.min(W,H)/2 - 6;
+let baseAngle = 0;
+const seg = (2*Math.PI) / reasons.length;
+const colors = ["#ffd6e0","#ffb3c9","#ffd1e8","#ff9eb3","#ffe6f0","#ffddeb","#ffd1e9"];
+
+function drawWheel(angle){
+  ctx.clearRect(0,0,W,H);
+  for(let i=0;i<reasons.length;i++){
+    const start = angle + i*seg;
+    const end = start + seg;
+    ctx.beginPath();
+    ctx.moveTo(cx,cy);
+    ctx.arc(cx,cy,radius,start,end);
+    ctx.closePath();
+    ctx.fillStyle = colors[i % colors.length];
+    ctx.fill();
+  }
+  ctx.beginPath(); ctx.arc(cx,cy,56,0,Math.PI*2); ctx.fillStyle = "#fff"; ctx.fill();
+  ctx.fillStyle = "#111"; ctx.font = "700 18px sans-serif"; ctx.textAlign = "center"; ctx.fillText("حُب",cx,cy+6);
+}
+drawWheel(baseAngle);
+
+let spinning = false;
+function spin(){
+  if(spinning) return;
+  spinning = true;
+  let velocity = 0.35 + Math.random()*0.6;
+  const friction = 0.992 + Math.random()*0.004;
+  function step(){
+    baseAngle += velocity;
+    velocity *= friction;
+    drawWheel(baseAngle);
+    if (velocity < 0.002){
+      spinning = false;
+      let a = ((-baseAngle + Math.PI/2) % (2*Math.PI) + 2*Math.PI) % (2*Math.PI);
+      const idx = Math.floor(a / seg) % reasons.length;
+      const chosen = reasons[idx];
+      document.getElementById('result').textContent = "العجلة بتقولك: " + chosen;
+      burstHearts(18);
+    } else {
+      requestAnimationFrame(step);
+    }
+  }
+  requestAnimationFrame(step);
+}
+document.getElementById('spinBtn').addEventListener('click', spin);
+
+function burstHearts(count){
+  for(let i=0;i<count;i++){
+    const heart=document.createElement("div");
+    heart.className="heart";
+    heart.textContent="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(16+Math.random()*16)+"px";
+    heart.style.animationDuration=(3+Math.random()*2)+"s";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),5000);
+  }
+}
+</script>
 </body>
 </html>
