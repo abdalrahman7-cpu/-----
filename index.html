@@ -9,8 +9,8 @@
       margin: 0;
       font-family: "Tahoma", sans-serif;
       text-align: center;
-      /* خلفية هيلو كيتي من كرومي */
-      background: url("https://raw.githubusercontent.com/iamshaunjp/css-playlist/master/hello-kitty.png");
+      /* خلفية هيلو كيتي الجديدة */
+      background: url("https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/68584817-9dd2-43f8-8567-714ca618ef38.png");
       background-repeat: repeat;
       background-size: 120px 120px;
       background-color: #ffe6f0;
@@ -117,28 +117,21 @@
       "8 بحبك عشان روحك اللي مفيش اجمل منها يا ملاكي❤"
     ];
     let spinning = false;
-
     function spin() {
       if (spinning) return;
       spinning = true;
-
       const music = document.getElementById("bg-music");
       music.play();
-
       const wheel = document.getElementById("wheel");
       const result = document.getElementById("result");
-
       const randomIndex = Math.floor(Math.random() * reasons.length);
       const degree = 360 * 5 + (randomIndex * (360 / reasons.length));
-
-      wheel.style.transform = `rotate(${degree}deg)`;
-
+      wheel.style.transform = rotate(${degree}deg);
       setTimeout(() => {
         result.textContent = reasons[randomIndex];
         spinning = false;
       }, 4000);
     }
-
     function createHeart() {
       const heart = document.createElement("div");
       heart.className = "heart";
