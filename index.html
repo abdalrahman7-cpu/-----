@@ -91,6 +91,34 @@
       0% { transform: translateY(-10%); opacity: 1; }
       100% { transform: translateY(110%); opacity: 0; }
     }
+
+    /* زرار هيلو كيتي فوق الشمال */
+    #hello-kitty-btn {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      width: 80px; /* حجم أكبر */
+      height: 80px;
+      background: url("https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/68584817-9dd2-43f8-8567-714ca618ef38.png") no-repeat center center;
+      background-size: contain;
+      border: none;
+      cursor: pointer;
+      z-index: 1000;
+    }
+    #kitty-message {
+      position: fixed;
+      top: 100px;
+      left: 10px;
+      background: #ffe6f0;
+      color: #ff3366;
+      font-size: 18px;
+      padding: 10px 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(255, 51, 102, 0.7);
+      max-width: 200px;
+      display: none;
+      z-index: 1000;
+    }
   </style>
 </head>
 <body>
@@ -100,6 +128,10 @@
   <button onclick="spin()">دوّر العجلة 🎡</button>
   <div id="result">يا ترى بحبك ليه؟ 💘</div>
   <div class="hearts" id="hearts"></div>
+
+  <!-- زرار هيلو كيتي -->
+  <button id="hello-kitty-btn" title="هيلو كيتي"></button>
+  <div id="kitty-message">بحبك يا مريم وبموت فيكي❤</div>
 
   <audio id="bg-music" loop>
     <source src="https://audio.jukehost.co.uk/zO5Y1sIHLgf5Szk5nD5ajb8cW1K2swQn" type="audio/mpeg" />
@@ -126,7 +158,7 @@
       const result = document.getElementById("result");
       const randomIndex = Math.floor(Math.random() * reasons.length);
       const degree = 360 * 5 + (randomIndex * (360 / reasons.length));
-      wheel.style.transform = rotate(${degree}deg);
+      wheel.style.transform = `rotate(${degree}deg)`;
       setTimeout(() => {
         result.textContent = reasons[randomIndex];
         spinning = false;
@@ -143,6 +175,18 @@
       setTimeout(() => heart.remove(), 5000);
     }
     setInterval(createHeart, 300);
+
+    // زرار هيلو كيتي
+    const kittyBtn = document.getElementById('hello-kitty-btn');
+    const kittyMsg = document.getElementById('kitty-message');
+
+    kittyBtn.addEventListener('click', () => {
+      if (kittyMsg.style.display === 'none' || kittyMsg.style.display === '') {
+        kittyMsg.style.display = 'block';
+      } else {
+        kittyMsg.style.display = 'none';
+      }
+    });
   </script>
 </body>
 </html>
