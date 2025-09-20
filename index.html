@@ -16,7 +16,7 @@
       background-color: #ffe6f0;
     }
     h1 {
-      color: #ff3366;
+      color: #ff0000; /* لون أحمر للقلب في العنوان */
       margin-top: 20px;
       text-shadow: 2px 2px 4px #fff;
     }
@@ -25,32 +25,38 @@
       width: 300px;
       height: 300px;
       border-radius: 50%;
-      border: 8px solid #ff6699;
+      border: 8px solid #ff66cc; /* لون بينك */
       background: conic-gradient(
         #ff99cc 0% 12.5%,
-        #ffccff 12.5% 25%,
-        #ffb3d9 25% 37.5%,
-        #ffcce6 37.5% 50%,
-        #ff99cc 50% 62.5%,
-        #ffccff 62.5% 75%,
-        #ffb3d9 75% 87.5%,
-        #ffcce6 87.5% 100%
+        #ffb3d9 12.5% 25%,
+        #ff80bf 25% 37.5%,
+        #ff99cc 37.5% 50%,
+        #ffb3d9 50% 62.5%,
+        #ff80bf 62.5% 75%,
+        #ff99cc 75% 87.5%,
+        #ffb3d9 87.5% 100%
       );
       position: relative;
-      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      box-shadow: 0 0 20px rgba(255, 102, 204, 0.5);
       transition: transform 4s ease-out;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 80px;
+      color: #ff66cc; /* لون القلب في المنتصف بينك */
+      user-select: none;
     }
     #pointer {
       width: 0;
       height: 0;
       border-left: 20px solid transparent;
       border-right: 20px solid transparent;
-      border-bottom: 30px solid #ff3366;
+      border-bottom: 30px solid #ff66cc; /* لون بينك */
       margin: 10px auto;
     }
     button {
       padding: 10px 20px;
-      background: #ff3366;
+      background: #ff0000; /* أحمر */
       border: none;
       border-radius: 25px;
       color: #fff;
@@ -60,17 +66,19 @@
       transition: background 0.3s;
     }
     button:hover {
-      background: #cc2952;
+      background: #cc0000;
     }
     #result {
       margin-top: 20px;
       font-size: 20px;
-      color: #333;
-      background: #fff0f5;
+      color: #ff0000; /* أحمر */
+      background: #ffe6e6;
       display: inline-block;
       padding: 10px 20px;
       border-radius: 15px;
-      box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+      box-shadow: 2px 2px 6px rgba(255, 0, 0, 0.3);
+      min-height: 60px;
+      line-height: 1.4;
     }
     .hearts {
       position: fixed;
@@ -83,7 +91,7 @@
     }
     .heart {
       position: absolute;
-      color: #ff3366;
+      color: #ff0000; /* لون القلب أحمر */
       font-size: 24px;
       animation: fall 4s linear infinite;
     }
@@ -109,12 +117,12 @@
       position: fixed;
       top: 100px;
       left: 10px;
-      background: #ffe6f0;
-      color: #ff3366;
+      background: #ffe6e6;
+      color: #ff0000; /* لون النص أحمر */
       font-size: 18px;
       padding: 10px 15px;
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(255, 51, 102, 0.7);
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
       max-width: 200px;
       display: none;
       z-index: 1000;
@@ -124,7 +132,7 @@
 <body>
   <h1>❤ لمريومتي ❤</h1>
   <div id="pointer"></div>
-  <div id="wheel"></div>
+  <div id="wheel">❤️</div>
   <button onclick="spin()">دوّر العجلة 🎡</button>
   <div id="result">يا ترى بحبك ليه؟ 💘</div>
   <div class="hearts" id="hearts"></div>
@@ -139,16 +147,21 @@
 
   <script>
     const reasons = [
-      "❤️ بحبك عشان ضحكتك اللي بتنسيني اي هم فالدنيا ❤️",
-      "❤️ بحبك عشان عيونك اللي احلي من السما بنجومها❤️",
-      "❤️ بحبك عشان كل لحظه بقضيها معاكي بتكون اجمل لحظه في حياتي❤️",
-      "❤️ بحبك عشان وجودك في حياتي هو اجمل هدية جتلي من ربنا ❤️",
-      "❤️ بحبك عشان ضحكتك اللي بتطمن قلبي وبتخليني انسي كل التعب❤️",
-      "❤️ بحبك عشان وجودك معايا بيخليني أحس إني مش لوحدي في الدنيا❤️",
-      "❤️ بحبك عشان صوتك اللي كل لما بسمعو بتطمن واحس ان لسه في سبب اعيش ليه❤️",
-      "❤️ بحبك عشان روحك اللي مفيش اجمل منها يا ملاكي❤️"
+      "❤بحبك  عشان ضحكتك اللي بتنسيني اي هم فالدنيا ❤",
+      "❤بحبك عشان عيونك اللي احلي من السما بنجومها❤",
+      "❤بحبك عشان كل لحظه بقضيها معاكي بتكون اجمل لحظه في حياتي❤",
+      "❤بحبك عشان وجودك في حياتي هو اجمل هدية جتلي من ربنا ❤",
+      "❤بحبك  عشان ضحكتك اللي بتطمن قلبي وبتخليني انسي كل التعب❤",
+      "❤بحبك عشان وجودك معايا  اللي بيخليني عايز اعيش عشانك❤",
+      "❤بحبك عشان صوتك اللي كل لما بسمعو بتطمن واحس ان لسه في سبب اعيش ليه❤",
+      "❤بحبك عشان روحك اللي مفيش اجمل منها يا ملاكي❤"
     ];
+
     let spinning = false;
+
+    // مصفوفة لتتبع الأسباب التي تم عرضها
+    let shownIndices = [];
+
     function spin() {
       if (spinning) return;
       spinning = true;
@@ -156,14 +169,29 @@
       music.play();
       const wheel = document.getElementById("wheel");
       const result = document.getElementById("result");
-      const randomIndex = Math.floor(Math.random() * reasons.length);
+
+      // إذا تم عرض كل الأسباب، نعيد تعيين المصفوفة لتكرار الأسباب من جديد
+      if (shownIndices.length === reasons.length) {
+        shownIndices = [];
+      }
+
+      // اختيار سبب لم يتم عرضه بعد
+      let randomIndex;
+      do {
+        randomIndex = Math.floor(Math.random() * reasons.length);
+      } while (shownIndices.includes(randomIndex));
+
+      shownIndices.push(randomIndex);
+
       const degree = 360 * 5 + (randomIndex * (360 / reasons.length));
       wheel.style.transform = `rotate(${degree}deg)`;
+
       setTimeout(() => {
         result.textContent = reasons[randomIndex];
         spinning = false;
       }, 4000);
     }
+
     function createHeart() {
       const heart = document.createElement("div");
       heart.className = "heart";
